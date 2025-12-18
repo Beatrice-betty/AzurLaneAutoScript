@@ -55,30 +55,19 @@ footer {
 
 .btn-aside {
     width: 4rem;
-    height: 5.5rem;
     font-weight: 500;
-    font-size: .85rem;
+    font-size: .8rem;
     background-color: transparent;
-    padding-top: 3.8rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0;
-    padding-right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    border-radius: 12px;
+    padding: 32px 0 0 7px;
+    border-radius: 10px;
     border: 0 solid;
-    margin: -3.5rem auto 0.5rem auto !important;
-    transition: all .2s ease;
-    z-index: 2;
+    transition: all .15s ease;
 }
 
 .btn-aside:hover,
 .btn-aside-active {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.08);
     font-weight: 600;
-    transform: scale(1.02);
 }
 
 .btn-off,
