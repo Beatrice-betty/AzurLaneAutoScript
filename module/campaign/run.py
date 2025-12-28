@@ -169,6 +169,15 @@ class CampaignRun(CampaignEvent, ShopStatus):
             str, str: name, folder
         """
         name = to_map_file_name(name)
+        # Handle event_20251218_cn d3-3 special case
+        if folder == 'event_20251218_cn':
+            # Convert d3-3 to d3_3 for three-battle retreat logic
+            if name == 'd3-3':
+                name = 'd3_3'
+                logger.info('Stage name d3-3 converted to d3_3 (three-battle retreat logic)')
+            # d3 remains as d3 for standard logic
+            elif name == 'd3':
+                logger.info('Stage name d3 using standard logic')
         # For GemsFarming, auto choose events or main chapters
         if self.config.task.command == 'GemsFarming':
             if self.stage_is_main(name):
