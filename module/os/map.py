@@ -471,7 +471,19 @@ class OSMap(OSFleet, Map, GlobeCamera, StrategicSearchHandler):
     def on_auto_search_battle_count_add(self):
         self._auto_search_battle_count += 1
         logger.attr('battle_count', self._auto_search_battle_count)
-        if getattr(self, 'is_in_task_cl1_leveling', False) and getattr(self, 'is_cl1_enabled', False):
+        
+        # Check if CL1 tracking should be enabled
+        try:
+            is_cl1_task = self.config.task.command == 'OpsiHazard1Leveling'
+            is_cl1_enabled = self.config.is_task_enabled('OpsiHazard1Leveling')
+            logger.attr('is_cl1_task', is_cl1_task)
+            logger.attr('is_cl1_enabled', is_cl1_enabled)
+        except Exception as e:
+            logger.warning(f'Failed to check CL1 status: {e}')
+            is_cl1_task = False
+            is_cl1_enabled = False
+        
+        if is_cl1_task and is_cl1_enabled:
             try:
                 try:
                     self._cl1_auto_search_battle_count += 1
@@ -480,10 +492,11 @@ class OSMap(OSFleet, Map, GlobeCamera, StrategicSearchHandler):
                 logger.attr('cl1_battle_count', self._cl1_auto_search_battle_count)
                 try:
                     self._cl1_increment_monthly(1)
+                    logger.info('Successfully incremented CL1 monthly battle count')
                 except Exception:
-                    logger.debug('Failed to persist monthly CL1 battle increment', exc_info=True)
+                    logger.exception('Failed to persist monthly CL1 battle increment')
             except Exception:
-                logger.debug('Failed to update cl1 battle counter', exc_info=True)
+                logger.exception('Failed to update cl1 battle counter')
 
             if self._auto_search_battle_count % 2 == 1:
                 if self._auto_search_round_timer:
