@@ -57,6 +57,63 @@ class OpsiMonthStats:
 
         return {"month": key, "total_battles": total, "akashi_encounters": akashi, "raw": data}
 
+    def get_detailed_summary(self, year: int | None = None, month: int | None = None) -> Dict[str, Any]:
+        """
+        获取详细的统计摘要,包含所有计算指标
+        
+        Args:
+            year: 年份 (默认当前年份)
+            month: 月份 (默认当前月份)
+        
+        Returns:
+            包含详细统计数据的字典
+        """
+        now = datetime.now()
+        if year is None:
+            year = now.year
+        if month is None:
+            month = now.month
+        key = f"{year:04d}-{month:02d}"
+
+        data = self._load_raw()
+        
+        # 基础数据
+        battle_count = int(data.get(key, 0))
+        akashi_encounters = int(data.get(f"{key}-akashi", 0))
+        akashi_ap = int(data.get(f"{key}-akashi-ap", 0))
+        
+        # 如果没有明确的akashi-ap字段,尝试从entries计算
+        if akashi_ap == 0:
+            entries = data.get(f"{key}-akashi-ap-entries", [])
+            if isinstance(entries, list):
+                for entry in entries:
+                    try:
+                        if isinstance(entry, dict):
+                            akashi_ap += int(entry.get('amount', 0))
+                        else:
+                            akashi_ap += int(entry)
+                    except Exception:
+                        continue
+        
+        # 计算衍生指标
+        battle_rounds = battle_count // 2
+        sortie_cost = battle_rounds * 120
+        
+        akashi_probability = round(akashi_encounters / battle_count, 4) if battle_count > 0 else 0.0
+        average_stamina = round(akashi_ap / akashi_encounters, 2) if akashi_encounters > 0 else 0.0
+        
+        return {
+            "month": key,
+            "battle_count": battle_count,
+            "battle_rounds": battle_rounds,
+            "sortie_cost": sortie_cost,
+            "akashi_encounters": akashi_encounters,
+            "akashi_probability": akashi_probability,
+            "average_stamina": average_stamina,
+            "net_stamina_gain": akashi_ap,
+        }
+
+
 
 _singleton: OpsiMonthStats | None = None
 
@@ -68,7 +125,8 @@ def get_opsi_stats() -> OpsiMonthStats:
     return _singleton
 
 
-__all__ = ["get_opsi_stats", "OpsiMonthStats"]
+__all__ = ["get_opsi_stats", "OpsiMonthStats", "compute_monthly_cl1_akashi_ap"]
+
 
 
 def compute_monthly_cl1_akashi_ap(year: int | None = None, month: int | None = None, campaign: str = "opsi_akashi") -> int:

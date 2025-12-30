@@ -2288,7 +2288,47 @@ class AlasGUI(Frame):
         # Add announcement checker task (initial delay 1 second)
         self.task_handler.add(announcement_checker(), delay=1)
 
+        # CL1 data auto submit feature
+        # Submits CL1 statistics data to cloud API every hour
+        def cl1_data_submit_daemon():
+            """CL1数据自动提交守护进程"""
+            try:
+                from module.statistics.cl1_data_submitter import get_cl1_submitter
+                submitter = get_cl1_submitter()
+                
+                while True:
+                    try:
+                        # 检查是否启用了侵蚀1任务
+                        # 只有在侵蚀1任务启用时才提交数据
+                        if State.config_updater:
+                            configs = State.config_updater.config
+                            cl1_enabled = False
+                            
+                            # 检查所有配置实例中是否有启用侵蚀1的
+                            for config_name, config_data in configs.items():
+                                if isinstance(config_data, dict):
+                                    scheduler = config_data.get('OpsiHazard1Leveling', {}).get('Scheduler', {})
+                                    if scheduler.get('Enable', False):
+                                        cl1_enabled = True
+                                        break
+                            
+                            if cl1_enabled:
+                                submitter.auto_submit()
+                            else:
+                                logger.debug('OpsiHazard1Leveling not enabled, skip CL1 data submission')
+                    except Exception as e:
+                        logger.debug(f'CL1 data submit check failed: {e}')
+                    
+                    yield
+            except Exception as e:
+                logger.exception(f'Failed to initialize CL1 data submitter: {e}')
+                yield
+
+        # Add CL1 data submit task (runs every hour)
+        self.task_handler.add(cl1_data_submit_daemon(), delay=3600)
+
         # Return to previous page
+
         if aside not in ["Home", None]:
             self.ui_alas(aside)
 
