@@ -513,18 +513,24 @@ class GeneratedConfig:
     # Group `OpsiHazard1Leveling`
     OpsiHazard1Leveling_TargetZone = 0  # 0, 44, 22
     OpsiHazard1Leveling_YellowCoinPreserve = 100000
-    OpsiHazard1Leveling_SirenResearch_Enable = False
-    OpsiHazard1Leveling_SirenBug_Enable = False
-    OpsiHazard1Leveling_SirenBug_Type = 'dangerous'  # dangerous, safe
-    OpsiHazard1Leveling_SirenBug_Zone = 0
     OpsiHazard1Leveling_MinimumActionPointReserve = 200
     OpsiHazard1Leveling_ExecuteFixedPatrolScan = False
     OpsiHazard1Leveling_Cl1Filter = 'ActionPoint > PurpleCoins'
+
+    # Group `OpsiSirenBug`
+    OpsiSirenBug_SirenResearch_Enable = False
+    OpsiSirenBug_SirenBug_Enable = False
+    OpsiSirenBug_SirenBug_Type = 'dangerous'  # dangerous, safe
+    OpsiSirenBug_SirenBug_Zone = 0
 
     # Group `OpsiCheckLeveling`
     OpsiCheckLeveling_TargetLevel = 0
     OpsiCheckLeveling_LastRun = datetime.datetime(2020, 1, 1, 0, 0)
     OpsiCheckLeveling_DelayAfterFull = False
+
+    # Group `OpsiScheduling`
+    OpsiScheduling_EnableSmartScheduling = False
+    OpsiScheduling_ActionPointNotifyLevels = '500,1000,2000,3000'
 
     # Group `Daemon`
     Daemon_EnterMap = True

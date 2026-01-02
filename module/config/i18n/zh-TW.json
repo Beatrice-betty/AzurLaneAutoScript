@@ -2605,24 +2605,6 @@
       "name": "保留x点黄币",
       "help": "雪风大人温馨提示：低于此设置的黄币数量将不会运行侵蚀一nanoda!"
     },
-    "SirenResearch_Enable": {
-      "name": "塞壬研究装置",
-      "help": "雪风大人提醒：消耗紫币换黄币，一个月没有几十万海里慎用nanoda!"
-    },
-    "SirenBug_Enable": {
-      "name": "塞壬研究装置Bug利用",
-      "help": "利用塞壬研究装置Bug，无限刷取高侵蚀区域塞壬研究装置資源\n啟用該功能前需啟用塞壬研究装置功能，否則該功能將不生效"
-    },
-    "SirenBug_Type": {
-      "name": "OpsiHazard1Leveling.SirenBug_Type.name",
-      "help": "OpsiHazard1Leveling.SirenBug_Type.help",
-      "dangerous": "dangerous",
-      "safe": "safe"
-    },
-    "SirenBug_Zone": {
-      "name": "指定塞壬Bug利用區域",
-      "help": "指定已刷出塞壬研究装置的高侵蝕區域\n支援海域ID、國服/國際服/日服/台服海域名稱，例如 \"51\", \"NA海域東南E\", \"NA Ocean SE Sector E\"\n填入默認值0，或者刪除數值即可取消指定"
-    },
     "MinimumActionPointReserve": {
       "name": "保留 X 点行动力",
       "help": "搏一搏，单车变摩托，雪风大人已经把幸运分给指挥官了nanoda，上吧nanoda！"
@@ -2634,6 +2616,30 @@
     "Cl1Filter": {
       "name": "明石购买筛选",
       "help": "侵蚀一明石一般只购买体力nanoda"
+    }
+  },
+  "OpsiSirenBug": {
+    "_info": {
+      "name": "OpsiSirenBug._info.name",
+      "help": "OpsiSirenBug._info.help"
+    },
+    "SirenResearch_Enable": {
+      "name": "OpsiSirenBug.SirenResearch_Enable.name",
+      "help": "OpsiSirenBug.SirenResearch_Enable.help"
+    },
+    "SirenBug_Enable": {
+      "name": "OpsiSirenBug.SirenBug_Enable.name",
+      "help": "OpsiSirenBug.SirenBug_Enable.help"
+    },
+    "SirenBug_Type": {
+      "name": "OpsiSirenBug.SirenBug_Type.name",
+      "help": "OpsiSirenBug.SirenBug_Type.help",
+      "dangerous": "dangerous",
+      "safe": "safe"
+    },
+    "SirenBug_Zone": {
+      "name": "OpsiSirenBug.SirenBug_Zone.name",
+      "help": "OpsiSirenBug.SirenBug_Zone.help"
     }
   },
   "OpsiCheckLeveling": {
@@ -2652,6 +2658,20 @@
     "DelayAfterFull": {
       "name": "達到目標等級後延遲任務",
       "help": ""
+    }
+  },
+  "OpsiScheduling": {
+    "_info": {
+      "name": "OpsiScheduling._info.name",
+      "help": "OpsiScheduling._info.help"
+    },
+    "EnableSmartScheduling": {
+      "name": "OpsiScheduling.EnableSmartScheduling.name",
+      "help": "OpsiScheduling.EnableSmartScheduling.help"
+    },
+    "ActionPointNotifyLevels": {
+      "name": "OpsiScheduling.ActionPointNotifyLevels.name",
+      "help": "OpsiScheduling.ActionPointNotifyLevels.help"
     }
   },
   "Daemon": {

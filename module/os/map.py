@@ -1297,19 +1297,19 @@ class OSMap(OSFleet, Map, GlobeCamera, StrategicSearchHandler):
         # 侵蚀一塞壬研究装置处理后，跳转指定高侵蚀区域触发塞壬研究装置消耗两次紫币，最后返回侵蚀一自律   
         try:
             siren_research_enable = bool(self.config.cross_get(
-                keys='OpsiHazard1Leveling.OpsiHazard1Leveling.SirenResearch_Enable',
+                keys='OpsiHazard1Leveling.OpsiSirenBug.SirenResearch_Enable',
                 default=False
             ))
             siren_bug_enable = bool(self.config.cross_get(
-                keys='OpsiHazard1Leveling.OpsiHazard1Leveling.SirenBug_Enable',
+                keys='OpsiHazard1Leveling.OpsiSirenBug.SirenBug_Enable',
                 default=False
             ))
             siren_bug_zone = self.config.cross_get(
-                keys='OpsiHazard1Leveling.OpsiHazard1Leveling.SirenBug_Zone',
+                keys='OpsiHazard1Leveling.OpsiSirenBug.SirenBug_Zone',
                 default=0
             )
             siren_bug_type = self.config.cross_get(
-                keys='OpsiHazard1Leveling.OpsiHazard1Leveling.SirenBug_Type',
+                keys='OpsiHazard1Leveling.OpsiSirenBug.SirenBug_Type',
                 default='dangerous'
             )
         except Exception as e:

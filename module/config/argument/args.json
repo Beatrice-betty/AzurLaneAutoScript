@@ -9499,6 +9499,17 @@
         "value": false
       }
     },
+    "OpsiScheduling": {
+      "EnableSmartScheduling": {
+        "type": "checkbox",
+        "value": false
+      },
+      "ActionPointNotifyLevels": {
+        "type": "input",
+        "value": "500,1000,2000,3000",
+        "valuetype": "str"
+      }
+    },
     "Storage": {
       "Storage": {
         "type": "storage",
@@ -9558,6 +9569,20 @@
         "type": "input",
         "value": 100000
       },
+      "MinimumActionPointReserve": {
+        "type": "input",
+        "value": 200
+      },
+      "ExecuteFixedPatrolScan": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Cl1Filter": {
+        "type": "textarea",
+        "value": "ActionPoint > PurpleCoins"
+      }
+    },
+    "OpsiSirenBug": {
       "SirenResearch_Enable": {
         "type": "checkbox",
         "value": false
@@ -9577,18 +9602,6 @@
       "SirenBug_Zone": {
         "type": "input",
         "value": 0
-      },
-      "MinimumActionPointReserve": {
-        "type": "input",
-        "value": 200
-      },
-      "ExecuteFixedPatrolScan": {
-        "type": "checkbox",
-        "value": false
-      },
-      "Cl1Filter": {
-        "type": "textarea",
-        "value": "ActionPoint > PurpleCoins"
       }
     },
     "OpsiFleet": {
@@ -9621,6 +9634,17 @@
       "DelayAfterFull": {
         "type": "checkbox",
         "value": false
+      }
+    },
+    "OpsiScheduling": {
+      "EnableSmartScheduling": {
+        "type": "checkbox",
+        "value": false
+      },
+      "ActionPointNotifyLevels": {
+        "type": "input",
+        "value": "500,1000,2000,3000",
+        "valuetype": "str"
       }
     },
     "Storage": {
