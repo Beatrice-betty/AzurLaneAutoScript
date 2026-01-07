@@ -28,6 +28,7 @@
       "Event2",
       "Raid",
       "Hospital",
+      "HospitalEvent",
       "MaritimeEscort",
       "EventShop",
       "WarArchives"
@@ -57,7 +58,8 @@
       "Meowfficer",
       "Guild",
       "Reward",
-      "Awaken"
+      "Awaken",
+      "Island"
     ]
   },
   "DailyMission": {
@@ -104,6 +106,7 @@
       "Daemon",
       "OpsiDaemon",
       "EventStory",
+      "BoxDisassemble",
       "Benchmark",
       "AzurLaneUncensored",
       "GameManager"
