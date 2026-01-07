@@ -979,10 +979,68 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 self._solved_map_event.add('is_logging_tower')
                 return True
             elif 'event' in result and grid.is_scanning_device:
-                self._solved_map_event.add('is_scanning_device')
-                self.os_auto_search_run(drop=drop)
-                # 调用塞壬BUG处理功能
-                self._handle_siren_bug_reinteract(drop=drop)
+                # OCR验证选项文本(二次确认是否为塞壬研究装置)
+                logger.hr('验证塞壬研究装置选项', level=2)
+                option_wait_timer = Timer(5, count=10).start()
+                options_verified = False
+                
+                while not option_wait_timer.reached():
+                    self.device.screenshot()
+                    options = self._story_option_buttons_2()
+                    if len(options) >= 3:
+                        logger.info('检测到剧情选项,验证文本')
+                        if self._verify_siren_research_options(options):
+                            logger.info('✓ 选项验证通过,确认为塞壬研究装置')
+                            options_verified = True
+                            break
+                        else:
+                            logger.warning('✗ 选项验证失败,不是目标装置')
+                            break
+                    time.sleep(0.3)
+                
+                if options_verified:
+                    # 验证通过,完全处理装置后标记
+                    logger.info('二次确认通过,开始处理装置')
+                    
+                    # 1. 循环点击第2个选项直到装置消失
+                    logger.info('开始处理装置,循环点击第2个选项')
+                    process_timer = Timer(30, count=60).start()  # 最多处理30秒
+                    while not process_timer.reached():
+                        self.device.screenshot()
+                        current_options = self._story_option_buttons_2()
+                        
+                        if len(current_options) >= 3:
+                            # 选项还在,点击第2个选项(索引1)
+                            self.device.click(current_options[1])  # 第2个选项
+                            logger.info('点击第2个选项,消耗装置')
+                            time.sleep(2.0)  # 等待处理
+                            
+                            # 处理可能的确认按钮
+                            self._click_story_confirm_button()
+                        else:
+                            # 选项消失了,装置处理完成
+                            logger.info('装置选项消失,处理完成')
+                            break
+                        
+                        time.sleep(0.5)
+                    
+                    # 2. 执行自律寻敌(处理装置触发的内容)
+                    self.os_auto_search_run(drop=drop)
+                    
+                    # 3. 装置处理完成,标记为已处理
+                    self._solved_map_event.add('is_scanning_device')
+                    logger.info('装置处理完成,已标记')
+                    
+                    # 4. 执行Bug利用
+                    self._handle_siren_bug_reinteract(drop=drop)
+                    
+                else:
+                    # 验证失败,退出对话但不标记(后续可重试)
+                    logger.info('验证失败,退出对话,不标记(可重试)')
+                    for _ in range(5):
+                        self.device.back()
+                        time.sleep(0.3)
+                
                 return True
             else:
                 logger.warning(f'Arrive question with unexpected result: {result}, expected: {grid.str}')
@@ -1137,9 +1195,50 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             with self.config.temporary(STORY_ALLOW_SKIP=False):
                 result = self.wait_until_walk_stable(
                     drop=drop, walk_out_of_step=False, confirm_timer=Timer(1.5, count=4))
-            self.os_auto_search_run(drop=drop)
-            # 调用塞壬BUG处理功能
-            self._handle_siren_bug_reinteract(drop=drop)
+            
+            # OCR验证选项文本(二次确认)
+            logger.hr('验证塞壬研究装置选项', level=2)
+            option_wait_timer = Timer(5, count=10).start()
+            options_verified = False
+            
+            while not option_wait_timer.reached():
+                self.device.screenshot()
+                options = self._story_option_buttons_2()
+                if len(options) >= 3:
+                    logger.info('检测到剧情选项,验证文本')
+                    if self._verify_siren_research_options(options):
+                        logger.info('✓ 选项验证通过,确认为塞壬研究装置')
+                        options_verified = True
+                        break
+                    else:
+                        logger.warning('✗ 选项验证失败,不是目标装置')
+                        break
+                time.sleep(0.3)
+            
+            if options_verified:
+                # 验证通过,完全处理装置后标记
+                logger.info('二次确认通过,开始处理装置')
+                
+                # 1. 点击"离开"退出当前对话
+                if len(options) >= 3:
+                    self.device.click(options[2])  # 第3个选项:"离开"
+                    time.sleep(1.0)
+                
+                # 2. 执行自律寻敌(处理装置触发的内容)
+                self.os_auto_search_run(drop=drop)
+                
+                # 3. 装置处理完成,标记为已处理
+                self._solved_map_event.add('is_scanning_device')
+                logger.info('装置处理完成,已标记')
+                
+                # 4. 执行Bug利用
+                self._handle_siren_bug_reinteract(drop=drop)
+            else:
+                # 验证失败,退出对话但不标记(后续可重试)
+                logger.info('验证失败,退出对话,不标记(可重试)')
+                for _ in range(5):
+                    self.device.back()
+                    time.sleep(0.3)
             if 'event' in result:
                 self._solved_map_event.add('is_scanning_device')
                 return True
@@ -1465,6 +1564,64 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 return True
             time.sleep(0.3)
         return False
+
+    def _verify_siren_research_options(self, options):
+        """
+        验证剧情选项是否为塞壬研究装置的正确选项
+        
+        Args:
+            options (list[Button]): 选项按钮列表
+            
+        Returns:
+            bool: True表示验证通过,False表示验证失败
+        """
+        if len(options) < 3:
+            logger.warning(f'选项数量不足: {len(options)}, 期望至少3个选项')
+            return False
+        
+        try:
+            from module.ocr.ocr import Ocr
+            import re
+            
+            # 定义关键词(去除符号,只保留关键文字)
+            keywords = [
+                ['塞王能源存储器', '探测隐藏', '敌人'],  # 选项1关键词
+                ['特别兑换凭证', '探测隐藏', '资源'],     # 选项2关键词  
+                ['离开']                                  # 选项3关键词
+            ]
+            
+            # OCR识别前3个选项
+            results = []
+            for i in range(min(3, len(options))):
+                option = options[i]
+                ocr = Ocr(option, lang='cnocr', name=f'SIREN_RESEARCH_OPTION_{i+1}')
+                result = ocr.ocr(self.device.image)
+                
+                # 去除所有非中文字符(包括符号)
+                result_clean = re.sub(r'[^\u4e00-\u9fff]', '', result)
+                results.append(result_clean)
+                logger.info(f'选项{i+1} OCR结果: {result} -> 清理后: {result_clean}')
+            
+            # 验证每个选项是否包含对应的关键词
+            match_count = 0
+            for i, (result, kw_list) in enumerate(zip(results, keywords)):
+                if all(kw in result for kw in kw_list):
+                    logger.info(f'选项{i+1} 验证通过: 包含关键词 {kw_list}')
+                    match_count += 1
+                else:
+                    logger.warning(f'选项{i+1} 验证失败: 缺少关键词 {kw_list}, 实际内容: {result}')
+            
+            # 至少2个选项匹配才算验证通过(容错)
+            if match_count >= 2:
+                logger.info(f'选项文本验证通过: {match_count}/3 个选项匹配')
+                return True
+            else:
+                logger.warning(f'选项文本验证失败: 仅 {match_count}/3 个选项匹配')
+                return False
+                
+        except Exception as e:
+            logger.error(f'选项文本验证异常: {e}', exc_info=True)
+            return False
 
     def _handle_siren_bug_reinteract(self, drop=None):
         # 侵蚀一塞壬研究装置处理后，跳转指定高侵蚀区域触发塞壬研究装置消耗两次紫币，最后返回侵蚀一自律   
