@@ -3646,12 +3646,16 @@
     "Coalition": {
       "Mode": {
         "type": "select",
-        "value": "tc1",
+        "value": "tc1-normal",
         "option": [
-          "tc1",
-          "tc2",
-          "tc3",
-          "ex"
+          "tc1-normal",
+          "tc2-normal",
+          "tc3-normal",
+          "tc1-hard",
+          "tc2-hard",
+          "tc3-hard",
+          "sp-normal",
+          "ex-normal"
         ]
       },
       "Fleet": {
@@ -7020,11 +7024,14 @@
         "type": "select",
         "value": "sp",
         "option": [
-          "tc1",
-          "tc2",
-          "tc3",
-          "sp",
-          "ex"
+          "tc1-normal",
+          "tc2-normal",
+          "tc3-normal",
+          "tc1-hard",
+          "tc2-hard",
+          "tc3-hard",
+          "sp-normal",
+          "ex-normal"
         ]
       },
       "Fleet": {

@@ -1417,11 +1417,14 @@
     "Mode": {
       "name": "难度",
       "help": "SP图需要使用活动每日SP运行",
-      "tc1": "tc1",
-      "tc2": "tc2",
-      "tc3": "tc3",
-      "sp": "sp",
-      "ex": "EX"
+      "tc1-normal": "tc1-normal",
+      "tc2-normal": "tc2-normal",
+      "tc3-normal": "tc3-normal",
+      "tc1-hard": "tc1-hard",
+      "tc2-hard": "tc2-hard",
+      "tc3-hard": "tc3-hard",
+      "sp-normal": "sp-normal",
+      "ex-normal": "ex-normal"
     },
     "Fleet": {
       "name": "出击队伍",
