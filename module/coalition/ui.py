@@ -477,12 +477,9 @@ class CoalitionUI(Combat):
         # 20251120活动需要额外获取难度按钮
         if event in ['coalition_20251120']:
             button_difficulty = self.coalition_20251120_get_entrance_difficulty(event, stage)
-        else:
-            button_difficulty = None
-        button = self.coalition_get_entrance(event, stage)
-        # 20251120活动需要额外获取难度按钮
-        if event in ['coalition_20260122']:
-            button_difficulty = self.coalition_20260122_get_entrance_difficulty(event, stage)
+        elif event in ['coalition_20260122']:
+            # 新活动使用关卡入口按钮作为难度按钮
+            button_difficulty = button
         else:
             button_difficulty = None
         # 获取舰队准备按钮

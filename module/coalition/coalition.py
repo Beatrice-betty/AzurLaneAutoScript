@@ -59,6 +59,8 @@ class Coalition(CoalitionCombat, CampaignEvent):
             ocr = Digit(NEONCITY_PT_OCR, name='OCR_PT', lang='cnocr', letter=(208, 208, 208), threshold=128)
         elif event == 'coalition_20251120':
             ocr = DALPtOcr(DAL_PT_OCR, name='OCR_PT' ,letter=(255, 213, 69), threshold=128)
+        elif event == 'coalition_20260122':
+            ocr = DALPtOcr(Light_Shadow_Fashion_PT_OCR, name='OCR_PT', letter=(255, 213, 69), threshold=128)
         else:
             logger.error(f'ocr object is not defined in event {event}')
             raise ScriptError
