@@ -274,7 +274,16 @@ Coalition:
     AmbushEvade: true
   Coalition:
     Mode:
-      option: [ tc1, tc2, tc3, sp, ex ]
+      option: [
+        tc1,
+        tc2,
+        tc3,
+        tc4,
+        tc5,
+        tc6,
+        sp,
+        ex
+      ]
   StopCondition:
     MapAchievement: non_stop
     StageIncrease: false
