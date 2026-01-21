@@ -275,14 +275,14 @@ Coalition:
   Coalition:
     Mode:
       option: [
-        tc1-normal,
-        tc2-normal,
-        tc3-normal,
-        tc1-hard,
-        tc2-hard,
-        tc3-hard,
-        sp-normal,
-        ex-normal
+        tc1,
+        tc2,
+        tc3,
+        tc4,
+        tc5,
+        tc6,
+        sp,
+        ex
       ]
   StopCondition:
     MapAchievement: non_stop

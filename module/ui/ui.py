@@ -21,6 +21,8 @@ from module.raid.assets import *
 from module.ui.assets import *
 from module.ui.page import Page, page_campaign, page_event, page_main, page_main_white, page_sp
 from module.ui_white.assets import *
+from module.coalition.assets import *
+
 
 
 class UI(InfoHandler):

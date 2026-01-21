@@ -233,14 +233,14 @@ class CoalitionUI(Combat):
             ('coalition_20251120', 'area6-hard'): DAL_AREA6,
 
             # 2026年01月22日活动（修改：DAL → Light_Shadow_Fashion）
-            ('coalition_20260122', 'tc1-normal'): Light_Shadow_Fashion_tc1,
-            ('coalition_20260122', 'tc2-normal'): Light_Shadow_Fashion_tc2,
-            ('coalition_20260122', 'tc3-normal'): Light_Shadow_Fashion_tc3,
-            ('coalition_20260122', 'sp-normal'): Light_Shadow_Fashion_sp,
-            ('coalition_20260122', 'tc1-hard'): Light_Shadow_Fashion_tc1,
-            ('coalition_20260122', 'tc2-hard'): Light_Shadow_Fashion_tc2,
-            ('coalition_20260122', 'tc3-hard'): Light_Shadow_Fashion_tc3,
-            ('coalition_20260122', 'ex-normal'): Light_Shadow_Fashion_ex,
+            ('coalition_20260122', 'tc1'): Light_Shadow_Fashion_tc1,
+            ('coalition_20260122', 'tc2'): Light_Shadow_Fashion_tc2,
+            ('coalition_20260122', 'tc3'): Light_Shadow_Fashion_tc3,
+            ('coalition_20260122', 'sp'): Light_Shadow_Fashion_sp,
+            ('coalition_20260122', 'tc4'): Light_Shadow_Fashion_tc1,
+            ('coalition_20260122', 'tc5'): Light_Shadow_Fashion_tc2,
+            ('coalition_20260122', 'tc6'): Light_Shadow_Fashion_tc3,
+            ('coalition_20260122', 'ex'): Light_Shadow_Fashion_ex,
 
 
         }
@@ -281,16 +281,6 @@ class CoalitionUI(Combat):
             ('coalition_20251120', 'area4-hard'): DAL_HARD,
             ('coalition_20251120', 'area5-hard'): DAL_HARD,
             ('coalition_20251120', 'area6-hard'): DAL_HARD,
-            # 普通难度（修改：20251120→20260122；DAL_NORMAL→Light_Shadow_Fashion_NORMAL）
-            ('coalition_20260122', 'tc1-normal'): Light_Shadow_Fashion_tc1,
-            ('coalition_20260122', 'tc2-normal'): Light_Shadow_Fashion_tc2,
-            ('coalition_20260122', 'tc3-normal'): Light_Shadow_Fashion_tc3,
-            ('coalition_20260122', 'sp-normal'): Light_Shadow_Fashion_sp,
-            ('coalition_20260122', 'ex-normal'): Light_Shadow_Fashion_ex,
-            # 困难难度（修改：20251120→20260122；DAL_HARD→Light_Shadow_Fashion_HARD）
-            ('coalition_20260122', 'tc1-hard'): Light_Shadow_Fashion_tc1,
-            ('coalition_20260122', 'tc2-hard'): Light_Shadow_Fashion_tc2,
-            ('coalition_20260122', 'tc3-hard'): Light_Shadow_Fashion_tc3,
         }
         stage = stage.lower()
         try:
@@ -351,14 +341,14 @@ class CoalitionUI(Combat):
             ('coalition_20251120', 'area6-hard'): 4,
 
             # 2026年01月22日活动（原2025年11月20日活动，已替换活动标识）
-            ('coalition_20260122', 'tc1-normal'): 2,
-            ('coalition_20260122', 'tc2-normal'): 3,
-            ('coalition_20260122', 'tc3-normal'): 3,
-            ('coalition_20260122', 'sp-normal'): 1,
-            ('coalition_20260122', 'tc1-hard'): 2,
-            ('coalition_20260122', 'tc2-hard'): 3,
-            ('coalition_20260122', 'tc3-hard'): 3,
-            ('coalition_20260122', 'ex-normal'): 1,
+            ('coalition_20260122', 'tc1'): 2,
+            ('coalition_20260122', 'tc2'): 3,
+            ('coalition_20260122', 'tc3'): 3,
+            ('coalition_20260122', 'sp'): 1,
+            ('coalition_20260122', 'tc4'): 2,
+            ('coalition_20260122', 'tc5'): 3,
+            ('coalition_20260122', 'tc6'): 3,
+            ('coalition_20260122', 'ex'): 1,
         }
         stage = stage.lower()
         try:
