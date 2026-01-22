@@ -11221,6 +11221,10 @@
       "APPreserveUntilReset": {
         "type": "checkbox",
         "value": false
+      },
+      "OperationCoinsReturnThreshold": {
+        "type": "input",
+        "value": 30000
       }
     },
     "OpsiFleet": {
