@@ -812,7 +812,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
         return finished_combat
     # 自动寻敌，遇到第一次战斗就返回
-    def os_auto_search_daemon_until_combat(self, drop=None, strategic=False, interrupt=None, , skip_first_screenshot=True):
+    def os_auto_search_daemon_until_combat(self, drop=None, strategic=False, interrupt=None, skip_first_screenshot=True):
         """
         Args:
             drop (DropRecord):
