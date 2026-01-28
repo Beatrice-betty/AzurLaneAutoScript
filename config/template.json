@@ -2231,7 +2231,8 @@
     "OpsiScheduling": {
       "EnableSmartScheduling": false,
       "ActionPointNotifyLevels": "500,1000,2000,3000",
-      "OperationCoinsReturnThreshold": 30000
+      "OperationCoinsReturnThreshold": 30000,
+      "OperationCoinsReturnThresholdApplyToAllCoinTasks": true
     },
     "Storage": {
       "Storage": {}
